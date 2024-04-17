@@ -11,16 +11,13 @@ public class Util {
     private final String driver = "com.mysql.cj.jdbc.Driver";
 
     public Connection getConnection() {
-        Connection connection = null;
         try {
-            connection = DriverManager.getConnection(connectionUrl, userName, password);
             Class.forName(driver);
-            System.out.println("connection success");
-        } catch (SQLException | ClassNotFoundException e) {
+            return DriverManager.getConnection(connectionUrl, userName, password);
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-            System.out.println("coonection failed");
+            System.out.println("Connection failed");
+            return null;
         }
-        return connection;
     }
-
 }
